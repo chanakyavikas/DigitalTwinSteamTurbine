@@ -48,35 +48,35 @@ applications:
   env:
     security_oauth2_resource_tokenInfoUri: https://ce30a5ca-9c2a-41f7-9ced-be97360eb282.predix-uaa.run.aws-usw02-pr.ice.predix.io/check_token
     security_oauth2_client_clientId: tutorial-svcs
-- name: digital-twin-tutorial-workflow
-  host: digital-twin-dt-tutorial-workflow
-  memory: 512M
+- name: digital-twin1-tutorial-workflow
+  host: digital-twin1-dt-tutorial-workflow
+  memory: 1GB
   path: tutorial-workflow/target/tutorial-workflow-1.1-SNAPSHOT.jar
   env:
    security_oauth2_resource_tokenInfoUri: https://ce30a5ca-9c2a-41f7-9ced-be97360eb282.predix-uaa.run.aws-usw02-pr.ice.predix.io/check_token
    security_oauth2_client_clientId: tutorial-svcs
-- name: <YOUR_OWN_UNIQUE_PREFIX>-tutorial-simulator
-  host: <YOUR_OWN_SIMULATOR_PREFIX>-dt-tutorial-simulator
-  memory: 512M
+- name: digital-twin1-tutorial-simulator
+  host: digital-twin1-dt-tutorial-simulator
+  memory: 1GB
   path: tutorial-simulator/target/tutorial-simulator-1.1-SNAPSHOT.jar
   env:
     # If using a proxy configure your proxy settings
-    # JAVA_OPTS: -Dhttps.proxyHost=<HOST> -Dhttps.proxyPort=<PORT> -Dhttp.nonProxyHosts=localhost
-    tutorial_simulator_oauth2_accessTokenUri: https://<YOUR_UAA_INSTANCE_HERE>.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token
-    tutorial_simulator_oauth2_clientId: <YOUR_CLIENT_ID>
-    security_oauth2_resource_tokenInfoUri: https://<YOUR_UAA_INSTANCE_HERE>.predix-uaa.run.aws-usw02-pr.ice.predix.io/check_token
-    security_oauth2_client_clientId: <YOUR_CLIENT_ID>
-    tutorial_workflow_workflowUri: https://<YOUR_OWN_WORKFLOW_SERVICE_PREFIX>-dt-tutorial-workflow.run.aws-usw02-pr.ice.predix.io/workflow/tutorial-workflow-public
+    JAVA_OPTS: -Dhttps.proxyHost=10.9.64.4 -Dhttps.proxyPort=8002 -Dhttp.nonProxyHosts=localhost
+    tutorial_simulator_oauth2_accessTokenUri: https://ce30a5ca-9c2a-41f7-9ced-be97360eb282.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token
+    tutorial_simulator_oauth2_clientId: tutorial-svcs
+    security_oauth2_resource_tokenInfoUri: https://ce30a5ca-9c2a-41f7-9ced-be97360eb282.predix-uaa.run.aws-usw02-pr.ice.predix.io/check_token
+    security_oauth2_client_clientId: tutorial-svcs
+    tutorial_workflow_workflowUri: https://digital-twin1-dt-tutorial-workflow.run.aws-usw02-pr.ice.predix.io/workflow/tutorial-workflow-public
     tutorial_workflow_workflowMethod: post
     tutorial_workflow_workflowBodyTag: params
     spring_application_json: |
       {
         "tutorial" : {
-          "workflow" : {
+         "workflow" : {
             "workflowHeaders" : [
               {
                 "name" : "Predix-Zone-Id",
-                "value" : "<YOUR_ANALYTIC_CATALOG_ZONE_ID_HERE>"
+                "value" : "1b0ad5cb-a84d-4ff7-a52f-7300d68c81e9"
               },
               { "name" : "Content-type",
                 "value" : "application/json"
